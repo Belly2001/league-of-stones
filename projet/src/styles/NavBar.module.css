@@ -1,0 +1,97 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: rgba(10, 10, 26, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(229, 204, 20, 0.1);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #E5CC14;
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.navLinks {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.navLink {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.navLink:hover {
+    color: #E5CC14;
+}
+
+.navButtons {
+    display: flex;
+    gap: 12px;
+}
+
+.btnInscription {
+    background-color: #031B4B;
+    color: #ffffff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btnInscription:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(3, 27, 75, 0.4);
+}
+
+.btnConnexion {
+    background-color: #E5CC14;
+    color: #0a0a1a;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btnConnexion:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(229, 204, 20, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 12px 20px;
+    }
+
+    .navLinks {
+        display: none;
+    }
+
+    .btnInscription,
+    .btnConnexion {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+}

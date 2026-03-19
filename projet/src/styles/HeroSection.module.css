@@ -1,4 +1,3 @@
-/* Animation d'entrée depuis la gauche */
 @keyframes slideInLeft {
     from {
         opacity: 0;
@@ -10,7 +9,6 @@
     }
 }
 
-/* Container principal */
 .heroContainer {
     position: relative;
     width: 100%;
@@ -19,7 +17,6 @@
     background-color: #0a0a1a;
 }
 
-/* Vidéo en arrière-plan */
 .videoBackground {
     position: absolute;
     top: 0;
@@ -30,7 +27,6 @@
     z-index: 0;
 }
 
-/* Ombre/dégradé sur le côté gauche */
 .shadowOverlay {
     position: absolute;
     top: 0;
@@ -47,7 +43,6 @@
     z-index: 1;
 }
 
-/* Contenu texte */
 .heroContent {
     position: relative;
     z-index: 2;
@@ -59,7 +54,6 @@
     max-width: 600px;
 }
 
-/* Tag "Jeu de cartes stratégique" */
 .heroTag {
     font-size: 12px;
     color: #E5CC14;
@@ -70,7 +64,6 @@
     animation: slideInLeft 0.8s ease-out 0.1s forwards;
 }
 
-/* Titre principal */
 .heroTitle {
     font-size: 48px;
     font-weight: 600;
@@ -80,7 +73,6 @@
     animation: slideInLeft 0.8s ease-out 0.3s forwards;
 }
 
-/* Description */
 .heroDescription {
     font-size: 16px;
     color: rgba(255, 255, 255, 0.75);
@@ -90,7 +82,6 @@
     animation: slideInLeft 0.8s ease-out 0.5s forwards;
 }
 
-/* Container des boutons */
 .heroButtons {
     display: flex;
     gap: 16px;
@@ -98,26 +89,7 @@
     animation: slideInLeft 0.8s ease-out 0.7s forwards;
 }
 
-/* Bouton S'inscrire */
-.btnPrimary {
-    background-color: #031B4B;
-    color: #ffffff;
-    border: none;
-    padding: 14px 32px;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.btnPrimary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(3, 27, 75, 0.4);
-}
-
-/* Bouton Se connecter */
-.btnSecondary {
+.btnPresentation {
     background-color: #E5CC14;
     color: #0a0a1a;
     border: none;
@@ -129,12 +101,11 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.btnSecondary:hover {
+.btnPresentation:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(229, 204, 20, 0.3);
 }
 
-/* Responsive - Tablette */
 @media (max-width: 768px) {
     .heroContent {
         padding: 0 40px;
@@ -149,7 +120,6 @@
     }
 }
 
-/* Responsive - Mobile */
 @media (max-width: 480px) {
     .heroContent {
         padding: 0 24px;
@@ -161,10 +131,6 @@
 
     .heroDescription {
         font-size: 14px;
-    }
-
-    .heroButtons {
-        flex-direction: column;
     }
 
     .shadowOverlay {

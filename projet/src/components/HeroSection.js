@@ -30,8 +30,7 @@ export default function HeroSection() {
                 </p>
 
                 <div className={styles.heroButtons}>
-                    <button className={styles.btnPrimary}>S'inscrire</button>
-                    <button className={styles.btnSecondary}>Se connecter</button>
+                    <button className={styles.btnPresentation}>Présentation</button>
                 </div>
             </div>
         </section>

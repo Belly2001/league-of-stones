@@ -1,0 +1,29 @@
+import styles from '../styles/NavBar.module.css';
+import Link from 'next/link';
+
+export default function NavBar() {
+    return (
+        <nav className={styles.navbar}>
+            {/* Logo */}
+            <Link href="/" className={styles.logo}>
+                ⚔️ League of Stones
+            </Link>
+
+            {/* Liens de navigation */}
+            <div className={styles.navLinks}>
+                <Link href="#how-it-works" className={styles.navLink}>
+                    Comment jouer
+                </Link>
+                <Link href="#champions" className={styles.navLink}>
+                    Champions
+                </Link>
+            </div>
+
+            {/* Boutons S'inscrire et Se connecter */}
+            <div className={styles.navButtons}>
+                <button className={styles.btnInscription}>S'inscrire</button>
+                <button className={styles.btnConnexion}>Se connecter</button>
+            </div>
+        </nav>
+    );
+}

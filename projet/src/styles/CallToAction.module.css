@@ -1,0 +1,35 @@
+.section {
+    background: linear-gradient(135deg, #031B4B 0%, #0a0a1a 100%);
+    padding: 80px 40px;
+    text-align: center;
+}
+
+.title {
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0 0 12px 0;
+}
+
+.description {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 15px;
+    margin: 0 0 36px 0;
+}
+
+.btnStart {
+    background-color: #E5CC14;
+    color: #0a0a1a;
+    border: none;
+    padding: 16px 48px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btnStart:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 32px rgba(229, 204, 20, 0.3);
+}

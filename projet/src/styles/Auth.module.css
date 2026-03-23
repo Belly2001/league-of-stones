@@ -1,231 +1,277 @@
-/* ============================================
-   AUTH STYLES - Inscription & Connexion
-   ============================================ */
+/* Styles Auth - Inscription & Connexion */
 
-/* ----------------
-   CONTAINER PRINCIPAL
-   ---------------- */
+/* Animation d'entrée depuis la droite */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Container avec image de fond */
 .container {
     min-height: 100vh;
-    background: linear-gradient(135deg, #1e90ff 0%, #4169e1 50%, #1e90ff 100%);
+    background-image: url('/image/image4.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 40px 20px;
+    justify-content: flex-end;
+    padding: 40px 60px;
 }
 
-/* ----------------
-   CARD BLANCHE
-   ---------------- */
-.card {
-    background-color: #ffffff;
-    border-radius: 20px;
-    padding: 48px 40px;
-    width: 100%;
-    max-width: 480px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+/* Ombre sombre à gauche */
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 65%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.9) 0%,
+        rgba(0, 0, 0, 0.7) 40%,
+        rgba(0, 0, 0, 0.3) 70%,
+        transparent 100%
+    );
+    z-index: 1;
 }
 
-/* ----------------
-   EN-TÊTE (Titre + Sous-titre)
-   ---------------- */
-.header {
-    text-align: center;
-    margin-bottom: 32px;
-}
-
-.title {
-    color: #1a1a2e;
-    font-size: 32px;
-    font-weight: 700;
-    margin: 0 0 8px 0;
-}
-
-.subtitle {
-    color: #6b7280;
-    font-size: 14px;
-    margin: 0;
-}
-
-/* ----------------
-   FORMULAIRE
-   ---------------- */
-.form {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
-
-/* ----------------
-   LIGNE DE 2 INPUTS (Nom + Prénom)
-   ---------------- */
-.row {
-    display: flex;
-    gap: 16px;
-}
-
-.row .inputGroup {
-    flex: 1;
-}
-
-/* ----------------
-   GROUPE INPUT (Label + Input + Hint/Error)
-   ---------------- */
-.inputGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-/* ----------------
-   LABEL
-   ---------------- */
-.label {
+/* Bouton retour accueil */
+.backButton {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    z-index: 10;
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #1a1a2e;
+    color: #ffffff;
+    text-decoration: none;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
+    padding: 10px 16px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.labelIcon {
-    color: #1e90ff;
+.backButton:hover {
+    background: rgba(0, 0, 0, 0.6);
+    transform: translateX(-4px);
+}
+
+.backButtonIcon {
     font-size: 16px;
     display: flex;
 }
 
-/* ----------------
-   INPUT WRAPPER (pour l'icône "voir mot de passe")
-   ---------------- */
+/* Card noire transparente */
+.card {
+    background: rgba(10, 10, 26, 0.75);
+    backdrop-filter: blur(16px);
+    border-radius: 16px;
+    padding: 28px 32px;
+    width: 100%;
+    max-width: 340px;
+    border: 1px solid rgba(229, 204, 20, 0.2);
+    position: relative;
+    z-index: 2;
+    animation: slideInRight 0.6s ease-out forwards;
+}
+
+/* Logo en haut */
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    text-decoration: none;
+}
+
+.logoIcon {
+    color: #E5CC14;
+    font-size: 24px;
+    display: flex;
+}
+
+.logoText {
+    color: #E5CC14;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* En-tête */
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.title {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+}
+
+.subtitle {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+    margin: 0;
+}
+
+/* Formulaire */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Groupe input */
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Label */
+.label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.labelIcon {
+    color: #E5CC14;
+    font-size: 14px;
+    display: flex;
+}
+
+/* Input wrapper */
 .inputWrapper {
     position: relative;
     display: flex;
     align-items: center;
 }
 
-/* ----------------
-   INPUT
-   ---------------- */
+/* Input */
 .input {
     width: 100%;
-    padding: 16px 20px;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    font-size: 15px;
-    color: #1a1a2e;
-    background-color: #f9fafb;
+    padding: 11px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    font-size: 13px;
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.08);
     transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .input::placeholder {
-    color: #9ca3af;
+    color: rgba(255, 255, 255, 0.4);
 }
 
 .input:focus {
     outline: none;
-    border-color: #1e90ff;
-    box-shadow: 0 0 0 4px rgba(30, 144, 255, 0.1);
-    background-color: #ffffff;
+    border-color: #E5CC14;
+    box-shadow: 0 0 0 3px rgba(229, 204, 20, 0.15);
+    background-color: rgba(255, 255, 255, 0.12);
 }
 
-/* Input avec mot de passe (padding pour l'icône) */
+/* Input mot de passe */
 .inputPassword {
-    padding-right: 50px;
+    padding-right: 42px;
 }
 
-/* Input en erreur */
+/* Input erreur */
 .inputError {
     border-color: #ef4444;
 }
 
 .inputError:focus {
     border-color: #ef4444;
-    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
 }
 
-/* ----------------
-   BOUTON VOIR MOT DE PASSE
-   ---------------- */
+/* Bouton voir mot de passe */
 .togglePassword {
     position: absolute;
-    right: 16px;
+    right: 12px;
     background: none;
     border: none;
-    color: #9ca3af;
-    font-size: 18px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 15px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: center;
     padding: 4px;
     transition: color 0.2s ease;
 }
 
 .togglePassword:hover {
-    color: #1e90ff;
+    color: #E5CC14;
 }
 
-/* ----------------
-   MESSAGES (Hint, Erreur)
-   ---------------- */
+/* Messages hint et erreur */
 .hint {
-    color: #6b7280;
-    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 10px;
     margin: 0;
 }
 
 .error {
     color: #ef4444;
-    font-size: 12px;
+    font-size: 10px;
     margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 4px;
 }
 
-/* ----------------
-   LIEN MOT DE PASSE OUBLIÉ
-   ---------------- */
+/* Lien mot de passe oublié */
 .forgotPassword {
     text-align: right;
-    margin-top: -8px;
+    margin-top: -4px;
 }
 
 .forgotPasswordLink {
-    color: #1e90ff;
-    font-size: 13px;
+    color: #E5CC14;
+    font-size: 11px;
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.2s ease;
 }
 
 .forgotPasswordLink:hover {
-    color: #1873cc;
     text-decoration: underline;
 }
 
-/* ----------------
-   BOUTON SUBMIT
-   ---------------- */
+/* Bouton submit */
 .submitButton {
     width: 100%;
-    padding: 16px;
-    background-color: #1e90ff;
-    color: #ffffff;
+    padding: 12px;
+    background-color: #E5CC14;
+    color: #0a0a1a;
     border: none;
-    border-radius: 12px;
-    font-size: 16px;
+    border-radius: 8px;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    margin-top: 8px;
+    margin-top: 4px;
 }
 
 .submitButton:hover {
-    background-color: #1873cc;
+    background-color: #d4bb13;
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(30, 144, 255, 0.3);
+    box-shadow: 0 6px 20px rgba(229, 204, 20, 0.25);
 }
 
 .submitButton:active {
@@ -233,76 +279,75 @@
 }
 
 .submitButton:disabled {
-    background-color: #9ca3af;
+    background-color: #6b6b6b;
+    color: #a0a0a0;
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
 }
 
-/* ----------------
-   LIEN VERS AUTRE PAGE
-   ---------------- */
+/* Lien vers autre page */
 .switchPage {
     text-align: center;
-    margin-top: 24px;
-    color: #6b7280;
-    font-size: 14px;
+    margin-top: 16px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
 }
 
 .switchPageLink {
-    color: #1e90ff;
+    color: #E5CC14;
     text-decoration: none;
     font-weight: 600;
-    transition: color 0.2s ease;
 }
 
 .switchPageLink:hover {
-    color: #1873cc;
     text-decoration: underline;
 }
 
-/* ----------------
-   ALERTES (Succès / Erreur)
-   ---------------- */
+/* Alertes */
 .alert {
-    padding: 16px;
-    border-radius: 12px;
-    margin-bottom: 24px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 16px;
     display: flex;
     align-items: center;
-    gap: 12px;
-    font-size: 14px;
+    gap: 10px;
+    font-size: 12px;
 }
 
 .alertIcon {
-    font-size: 20px;
+    font-size: 16px;
     flex-shrink: 0;
 }
 
 .alertSuccess {
-    background-color: #d1fae5;
-    color: #065f46;
+    background-color: rgba(16, 185, 129, 0.2);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #10b981;
 }
 
 .alertError {
-    background-color: #fee2e2;
-    color: #991b1b;
+    background-color: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #ef4444;
 }
 
-/* ----------------
-   RESPONSIVE
-   ---------------- */
-@media (max-width: 500px) {
+/* Responsive */
+@media (max-width: 600px) {
+    .container {
+        justify-content: center;
+        padding: 30px 20px;
+    }
+
     .card {
-        padding: 32px 24px;
+        max-width: 320px;
+        padding: 24px;
     }
 
-    .title {
-        font-size: 26px;
-    }
-
-    .row {
-        flex-direction: column;
-        gap: 24px;
+    .backButton {
+        top: 20px;
+        left: 20px;
+        padding: 8px 12px;
+        font-size: 13px;
     }
 }

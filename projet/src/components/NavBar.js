@@ -21,8 +21,12 @@ export default function NavBar() {
 
             {/* Boutons S'inscrire et Se connecter */}
             <div className={styles.navButtons}>
-                <button className={styles.btnInscription}>S'inscrire</button>
-                <button className={styles.btnConnexion}>Se connecter</button>
+                <Link href="/inscription">
+                    <button className={styles.btnInscription}>S'inscrire</button>
+                </Link>
+                <Link href="/connexion">
+                    <button className={styles.btnConnexion}>Se connecter</button>
+                </Link>
             </div>
         </nav>
     );

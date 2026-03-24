@@ -1,23 +1,49 @@
-/* Styles pour Participer & Demande */
+/* Styles Matchmaking - Participer & Demande */
 
-/* Container principal */
+/* Container principal avec image de fond */
 .container {
     min-height: 100vh;
-    background-color: #0a0a1a;
+    background-image: url('/image/image6.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 40px 20px;
 }
 
-/* Card blanche */
+/* Ombre sombre à gauche */
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 65%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.9) 0%,
+        rgba(0, 0, 0, 0.7) 40%,
+        rgba(0, 0, 0, 0.3) 70%,
+        transparent 100%
+    );
+    z-index: 1;
+}
+
+/* Card transparente (Participer) */
 .card {
-    background-color: #ffffff;
+    background: rgba(10, 10, 26, 0.75);
+    backdrop-filter: blur(16px);
     border-radius: 16px;
     padding: 40px;
     width: 100%;
     max-width: 450px;
     text-align: center;
+    border: 1px solid rgba(229, 204, 20, 0.2);
+    position: relative;
+    z-index: 2;
 }
 
 /* Logo */
@@ -36,14 +62,14 @@
 }
 
 .logoText {
-    color: #1a1a2e;
+    color: #E5CC14;
     font-size: 20px;
     font-weight: 700;
 }
 
 /* Titre */
 .title {
-    color: #1a1a2e;
+    color: #ffffff;
     font-size: 24px;
     font-weight: 700;
     margin: 0 0 12px 0;
@@ -51,7 +77,7 @@
 
 /* Description */
 .description {
-    color: #6b7280;
+    color: rgba(255, 255, 255, 0.7);
     font-size: 14px;
     line-height: 1.6;
     margin: 0 0 32px 0;
@@ -77,18 +103,23 @@
 }
 
 .btnBlue:disabled {
-    background-color: #9ca3af;
+    background-color: #4a4a4a;
+    color: #888888;
     cursor: not-allowed;
     transform: none;
 }
 
-/* Card large pour Demande */
+/* Card large transparente (Demande) */
 .cardLarge {
-    background-color: #ffffff;
+    background: rgba(10, 10, 26, 0.75);
+    backdrop-filter: blur(16px);
     border-radius: 16px;
     padding: 32px;
     width: 100%;
     max-width: 600px;
+    border: 1px solid rgba(229, 204, 20, 0.2);
+    position: relative;
+    z-index: 2;
 }
 
 /* Header de la liste */
@@ -100,7 +131,7 @@
 }
 
 .listTitle {
-    color: #1a1a2e;
+    color: #ffffff;
     font-size: 20px;
     font-weight: 700;
     margin: 0;
@@ -115,11 +146,11 @@
 }
 
 .refreshBtn {
-    background: none;
-    border: 1px solid #e5e7eb;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     padding: 8px 12px;
-    color: #6b7280;
+    color: rgba(255, 255, 255, 0.8);
     font-size: 14px;
     cursor: pointer;
     display: flex;
@@ -129,7 +160,7 @@
 }
 
 .refreshBtn:hover {
-    background-color: #f3f4f6;
+    background: rgba(255, 255, 255, 0.15);
 }
 
 /* Liste des participants */
@@ -139,6 +170,21 @@
     gap: 12px;
     max-height: 400px;
     overflow-y: auto;
+    padding-right: 8px;
+}
+
+.participantsList::-webkit-scrollbar {
+    width: 5px;
+}
+
+.participantsList::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+
+.participantsList::-webkit-scrollbar-thumb {
+    background: rgba(229, 204, 20, 0.3);
+    border-radius: 3px;
 }
 
 /* Un participant */
@@ -147,9 +193,9 @@
     align-items: center;
     justify-content: space-between;
     padding: 14px 16px;
-    background-color: #f9fafb;
+    background-color: rgba(255, 255, 255, 0.08);
     border-radius: 10px;
-    border: 1px solid #e5e7eb;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .participantInfo {
@@ -172,19 +218,19 @@
 }
 
 .participantName {
-    color: #1a1a2e;
+    color: #ffffff;
     font-size: 15px;
     font-weight: 600;
     margin: 0;
 }
 
 .participantEmail {
-    color: #6b7280;
+    color: rgba(255, 255, 255, 0.5);
     font-size: 12px;
     margin: 0;
 }
 
-/* Bouton jaune (Demander/Annuler/Accepté) */
+/* Bouton jaune (Demander) */
 .btnYellow {
     padding: 10px 20px;
     background-color: #E5CC14;
@@ -238,18 +284,20 @@
 .emptyMessage {
     text-align: center;
     padding: 40px 20px;
-    color: #6b7280;
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .emptyIcon {
     font-size: 48px;
     margin-bottom: 12px;
     opacity: 0.5;
+    color: rgba(255, 255, 255, 0.3);
 }
 
 .emptyText {
     font-size: 14px;
     margin: 0;
+    line-height: 1.6;
 }
 
 /* Loading */
@@ -259,15 +307,15 @@
     align-items: center;
     justify-content: center;
     padding: 40px;
-    color: #6b7280;
+    color: rgba(255, 255, 255, 0.6);
     gap: 12px;
 }
 
 .spinner {
     width: 32px;
     height: 32px;
-    border: 3px solid #e5e7eb;
-    border-top-color: #1e90ff;
+    border: 3px solid rgba(229, 204, 20, 0.2);
+    border-top-color: #E5CC14;
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
 }
@@ -283,23 +331,58 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    color: #6b7280;
+    color: rgba(255, 255, 255, 0.6);
     font-size: 13px;
     text-decoration: none;
     margin-top: 20px;
+    transition: color 0.2s ease;
 }
 
 .backLink:hover {
-    color: #1a1a2e;
+    color: #E5CC14;
 }
 
 /* Erreur */
 .error {
-    background-color: #fee2e2;
-    color: #991b1b;
+    background-color: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #ef4444;
     padding: 12px 16px;
     border-radius: 8px;
     font-size: 13px;
     margin-bottom: 16px;
     text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .card {
+        padding: 28px 24px;
+    }
+
+    .cardLarge {
+        padding: 24px 20px;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .listHeader {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+
+    .participant {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+
+    .btnYellow,
+    .btnCancel,
+    .btnAccepted {
+        width: 100%;
+    }
 }

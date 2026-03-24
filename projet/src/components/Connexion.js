@@ -59,49 +59,53 @@ export default function Connexion() {
     };
 
     // Soumet le formulaire
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setAlert({ type: '', message: '' });
+    // Soumet le formulaire
+const handleSubmit = async (e) => {
+    e.preventDefault();
+    setAlert({ type: '', message: '' });
 
-        if (!validateForm()) return;
+    if (!validateForm()) return;
 
-        setIsLoading(true);
+    setIsLoading(true);
 
-        try {
-            const response = await fetch('http://localhost:3000/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: formData.email,
-                    password: formData.password
-                })
-            });
+    try {
+        const response = await fetch('http://localhost:3001/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: formData.email,
+                password: formData.password
+            })
+        });
 
-            const data = await response.json();
+        const data = await response.json();
 
-            if (data.data && data.data.token) {
-                localStorage.setItem('token', data.data.token);
-                localStorage.setItem('userId', data.data.id);
-                localStorage.setItem('userName', data.data.name);
-                localStorage.setItem('userEmail', data.data.email);
+        if (data.token) {
+            // Stocker les infos utilisateur
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('userId', data.id);
+            localStorage.setItem('userName', data.name);
+            localStorage.setItem('userEmail', data.email);
 
-                router.push('/deck');
+            router.push('/buildDeck');
 
-            } else if (data.message) {
-                setAlert({ type: 'error', message: data.message });
-            }
-
-        } catch (error) {
-            setAlert({
-                type: 'error',
-                message: 'Serveur inaccessible.'
-            });
-        } finally {
-            setIsLoading(false);
+        } else if (data.message) {
+            setAlert({ type: 'error', message: data.message });
+        } else {
+            setAlert({ type: 'error', message: 'Erreur de connexion.' });
         }
-    };
+
+    } catch (error) {
+        setAlert({
+            type: 'error',
+            message: 'Serveur inaccessible.'
+        });
+    } finally {
+        setIsLoading(false);
+    }
+};
 
     return (
         <div className={styles.container}>

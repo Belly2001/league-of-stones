@@ -72,53 +72,58 @@ export default function Inscription() {
     };
 
     // Soumet le formulaire
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setAlert({ type: '', message: '' });
+    // Soumet le formulaire
+const handleSubmit = async (e) => {
+    e.preventDefault();
+    setAlert({ type: '', message: '' });
 
-        if (!validateForm()) return;
+    if (!validateForm()) return;
 
-        setIsLoading(true);
+    setIsLoading(true);
 
-        try {
-            const response = await fetch('http://localhost:3000/user', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: formData.email,
-                    name: formData.name.trim(),
-                    password: formData.password
-                })
-            });
+    try {
+        const response = await fetch('http://localhost:3001/user', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: formData.email,
+                name: formData.name.trim(),
+                password: formData.password
+            })
+        });
 
-            const data = await response.json();
+        const data = await response.json();
 
-            if (data.data && data.data.id) {
-                setAlert({
-                    type: 'success',
-                    message: 'Compte créé ! Redirection...'
-                });
-
-                setTimeout(() => {
-                    router.push('/connexion');
-                }, 2000);
-
-            } else if (data.message) {
-                setAlert({ type: 'error', message: data.message });
-            }
-
-        } catch (error) {
+        if (data.data && data.data.id) {
             setAlert({
-                type: 'error',
-                message: 'Serveur inaccessible.'
+                type: 'success',
+                message: 'Compte créé ! Redirection...'
             });
-        } finally {
-            setIsLoading(false);
-        }
-    };
 
+            setTimeout(() => {
+                router.push('/connexion');
+            }, 2000);
+
+        } else if (data.message) {
+            // Affiche le vrai message d'erreur de l'API
+            setAlert({ type: 'error', message: data.message });
+        } else {
+            setAlert({ type: 'error', message: 'Une erreur est survenue.' });
+        }
+
+    } catch (error) {
+        // Seulement si le serveur est vraiment inaccessible
+        console.error('Erreur:', error);
+        setAlert({
+            type: 'error',
+            message: 'Serveur inaccessible.'
+        });
+    } finally {
+        setIsLoading(false);
+    }
+};
     return (
         <div className={styles.container}>
 

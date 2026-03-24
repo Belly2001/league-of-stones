@@ -1,0 +1,509 @@
+/* Styles BuildDeck - Création du deck */
+
+/* Animation d'entrée */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Container principal */
+.container {
+    min-height: 100vh;
+    background-image: url('/images/image4.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+}
+
+/* Overlay sombre */
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 1;
+}
+
+/* Contenu */
+.content {
+    position: relative;
+    z-index: 2;
+    padding: 20px 30px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.backButton:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(-4px);
+}
+
+.backButtonIcon {
+    font-size: 14px;
+    display: flex;
+}
+
+.titleSection {
+    text-align: center;
+}
+
+.title {
+    color: #E5CC14;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.titleIcon {
+    font-size: 22px;
+}
+
+.subtitle {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 13px;
+    margin: 0;
+}
+
+.deckCount {
+    background: rgba(229, 204, 20, 0.15);
+    border: 1px solid rgba(229, 204, 20, 0.3);
+    border-radius: 8px;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+.deckCountNumber {
+    color: #E5CC14;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.deckCountLabel {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 11px;
+    margin: 0;
+}
+
+/* Layout principal */
+.main {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 24px;
+    flex: 1;
+}
+
+/* Section cartes disponibles */
+.availableSection {
+    background: rgba(10, 10, 26, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    animation: fadeIn 0.5s ease-out 0.1s backwards;
+}
+
+.sectionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.sectionTitle {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sectionTitleIcon {
+    color: #E5CC14;
+    font-size: 16px;
+}
+
+/* Barre de recherche */
+.searchBar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 8px 12px;
+    width: 220px;
+}
+
+.searchIcon {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 14px;
+}
+
+.searchInput {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-size: 13px;
+    width: 100%;
+}
+
+.searchInput::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Grille de cartes */
+.cardsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 16px;
+    max-height: calc(100vh - 220px);
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.cardsGrid::-webkit-scrollbar {
+    width: 6px;
+}
+
+.cardsGrid::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+
+.cardsGrid::-webkit-scrollbar-thumb {
+    background: rgba(229, 204, 20, 0.3);
+    border-radius: 3px;
+}
+
+/* Carte champion */
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    border-color: #E5CC14;
+    box-shadow: 0 8px 24px rgba(229, 204, 20, 0.15);
+}
+
+.cardSelected {
+    border-color: #E5CC14;
+    background: rgba(229, 204, 20, 0.1);
+}
+
+.cardImage {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+}
+
+.cardInfo {
+    padding: 10px;
+}
+
+.cardName {
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cardStats {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+}
+
+.statAtk {
+    color: #ff6b6b;
+}
+
+.statDef {
+    color: #4ecdc4;
+}
+
+/* Section Mon Deck */
+.deckSection {
+    background: rgba(10, 10, 26, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    border: 1px solid rgba(229, 204, 20, 0.2);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    animation: slideInRight 0.5s ease-out 0.2s backwards;
+}
+
+.deckCards {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: calc(100vh - 320px);
+    overflow-y: auto;
+    margin-bottom: 16px;
+    padding-right: 8px;
+}
+
+.deckCards::-webkit-scrollbar {
+    width: 5px;
+}
+
+.deckCards::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+
+.deckCards::-webkit-scrollbar-thumb {
+    background: rgba(229, 204, 20, 0.3);
+    border-radius: 3px;
+}
+
+/* Carte dans le deck (mini) */
+.deckCard {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 8px 10px;
+    transition: background 0.2s ease;
+}
+
+.deckCard:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.deckCardImage {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+.deckCardInfo {
+    flex: 1;
+}
+
+.deckCardName {
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 500;
+    margin: 0 0 2px 0;
+}
+
+.deckCardStats {
+    display: flex;
+    gap: 10px;
+    font-size: 11px;
+}
+
+.removeButton {
+    background: rgba(239, 68, 68, 0.2);
+    border: none;
+    color: #ef4444;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: background 0.2s ease;
+}
+
+.removeButton:hover {
+    background: rgba(239, 68, 68, 0.3);
+}
+
+/* Message deck vide */
+.emptyDeck {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.4);
+    text-align: center;
+    padding: 20px;
+}
+
+.emptyDeckIcon {
+    font-size: 40px;
+    margin-bottom: 12px;
+    opacity: 0.5;
+}
+
+.emptyDeckText {
+    font-size: 13px;
+    margin: 0;
+}
+
+/* Bouton valider */
+.validateButton {
+    width: 100%;
+    padding: 14px;
+    background: #E5CC14;
+    color: #0a0a1a;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.validateButton:hover:not(:disabled) {
+    background: #d4bb13;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(229, 204, 20, 0.25);
+}
+
+.validateButton:disabled {
+    background: #4a4a4a;
+    color: #888888;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.validateIcon {
+    font-size: 16px;
+}
+
+/* Loading */
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: rgba(255, 255, 255, 0.6);
+    gap: 12px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(229, 204, 20, 0.2);
+    border-top-color: #E5CC14;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .main {
+        grid-template-columns: 1fr;
+    }
+
+    .deckSection {
+        order: -1;
+    }
+
+    .deckCards {
+        max-height: 200px;
+    }
+
+    .cardsGrid {
+        max-height: 400px;
+    }
+}
+
+@media (max-width: 600px) {
+    .content {
+        padding: 16px;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .cardsGrid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 12px;
+    }
+}

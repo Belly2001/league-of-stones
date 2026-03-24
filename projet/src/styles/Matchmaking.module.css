@@ -1,0 +1,305 @@
+/* Styles pour Participer & Demande */
+
+/* Container principal */
+.container {
+    min-height: 100vh;
+    background-color: #0a0a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+/* Card blanche */
+.card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 40px;
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 24px;
+    text-decoration: none;
+}
+
+.logoIcon {
+    color: #E5CC14;
+    font-size: 28px;
+}
+
+.logoText {
+    color: #1a1a2e;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* Titre */
+.title {
+    color: #1a1a2e;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+}
+
+/* Description */
+.description {
+    color: #6b7280;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 0 32px 0;
+}
+
+/* Bouton bleu (Participer) */
+.btnBlue {
+    width: 100%;
+    padding: 16px;
+    background-color: #1e90ff;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btnBlue:hover {
+    background-color: #1a7ad9;
+    transform: translateY(-2px);
+}
+
+.btnBlue:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Card large pour Demande */
+.cardLarge {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 32px;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Header de la liste */
+.listHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.listTitle {
+    color: #1a1a2e;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.listTitleIcon {
+    color: #E5CC14;
+    font-size: 22px;
+}
+
+.refreshBtn {
+    background: none;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: #6b7280;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.refreshBtn:hover {
+    background-color: #f3f4f6;
+}
+
+/* Liste des participants */
+.participantsList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Un participant */
+.participant {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background-color: #f9fafb;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+}
+
+.participantInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.participantAvatar {
+    width: 40px;
+    height: 40px;
+    background-color: #1e90ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.participantName {
+    color: #1a1a2e;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.participantEmail {
+    color: #6b7280;
+    font-size: 12px;
+    margin: 0;
+}
+
+/* Bouton jaune (Demander/Annuler/Accepté) */
+.btnYellow {
+    padding: 10px 20px;
+    background-color: #E5CC14;
+    color: #1a1a2e;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    min-width: 100px;
+}
+
+.btnYellow:hover {
+    background-color: #d4bb13;
+    transform: translateY(-1px);
+}
+
+/* Bouton Annuler (gris) */
+.btnCancel {
+    padding: 10px 20px;
+    background-color: #6b7280;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    min-width: 100px;
+}
+
+.btnCancel:hover {
+    background-color: #5a6270;
+}
+
+/* Bouton Accepté (vert) */
+.btnAccepted {
+    padding: 10px 20px;
+    background-color: #10b981;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: default;
+    min-width: 100px;
+}
+
+/* Message vide */
+.emptyMessage {
+    text-align: center;
+    padding: 40px 20px;
+    color: #6b7280;
+}
+
+.emptyIcon {
+    font-size: 48px;
+    margin-bottom: 12px;
+    opacity: 0.5;
+}
+
+.emptyText {
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Loading */
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    color: #6b7280;
+    gap: 12px;
+}
+
+.spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid #e5e7eb;
+    border-top-color: #1e90ff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Lien retour */
+.backLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #6b7280;
+    font-size: 13px;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.backLink:hover {
+    color: #1a1a2e;
+}
+
+/* Erreur */
+.error {
+    background-color: #fee2e2;
+    color: #991b1b;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 16px;
+    text-align: center;
+}

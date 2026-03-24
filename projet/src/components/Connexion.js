@@ -59,7 +59,6 @@ export default function Connexion() {
     };
 
     // Soumet le formulaire
-    // Soumet le formulaire
 const handleSubmit = async (e) => {
     e.preventDefault();
     setAlert({ type: '', message: '' });
@@ -89,7 +88,7 @@ const handleSubmit = async (e) => {
             localStorage.setItem('userName', data.name);
             localStorage.setItem('userEmail', data.email);
 
-            router.push('/buildDeck');
+            router.push('/participer');
 
         } else if (data.message) {
             setAlert({ type: 'error', message: data.message });

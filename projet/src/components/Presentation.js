@@ -9,10 +9,9 @@ export default function Presentation() {
 
                 {/* Partie gauche - Texte */}
                 <div className={styles.textSection}>
-                    <h2 className={styles.title}>LEAGUE OF STONES</h2>
+                    <h2 className={styles.title}>PRÉSENTATION</h2>
                     <p className={styles.description}>
-                        Dans ce projet, il est question de développer un mashup (mélange) 
-                        de deux jeux vidéos. En utilisant le système de jeu de Hearthstone (HS) 
+                        League Of Stones est un mashup de deux jeux vidéos. Utilisant le système de jeu de Hearthstone (HS) 
                         développé par Blizzard™ nous intégrerons les données ouvertes du jeu 
                         League Of Legends (LoL) développé par Riot Games.
                     </p>
@@ -22,7 +21,7 @@ export default function Presentation() {
                 <div className={styles.cardSection}>
                     <div className={styles.card}>
                         <img 
-                            src="/image/image9.jpg" 
+                            src="/image/image8.jpg" 
                             alt="Hearthstone" 
                             className={styles.cardImage}
                         />

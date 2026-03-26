@@ -1,5 +1,6 @@
 import NavBar from '../components/NavBar';
 import HeroSection from '../components/HeroSection';
+import Presentation from '../components/Presentation';
 import HowItWorks from '../components/HowItWorks';
 import Features from '../components/Features';
 import Champions from '../components/Champions';
@@ -13,6 +14,7 @@ export default function Home() {
             <NavBar />
             <main>
                 <HeroSection />
+                <Presentation />
                 <HowItWorks />
                 <Features />
                 <Champions />

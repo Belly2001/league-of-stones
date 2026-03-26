@@ -30,7 +30,9 @@ export default function HeroSection() {
                 </p>
 
                 <div className={styles.heroButtons}>
-                    <button className={styles.btnPresentation}>Présentation</button>
+                    <a href="#presentation" className={styles.btnPresentation}>
+                        Présentation
+                    </a>
                 </div>
             </div>
         </section>

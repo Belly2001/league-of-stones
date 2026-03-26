@@ -1,0 +1,158 @@
+/* Styles Presentation */
+
+/* Container principal avec image de fond */
+.container {
+    min-height: 100vh;
+    background-image: url('/image/image8.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 60px 80px;
+}
+
+/* Ombre sombre à gauche */
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 65%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.9) 0%,
+        rgba(0, 0, 0, 0.7) 40%,
+        rgba(0, 0, 0, 0.3) 70%,
+        transparent 100%
+    );
+    z-index: 1;
+}
+
+/* Contenu */
+.content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Partie gauche (texte) */
+.textSection {
+    flex: 1;
+    max-width: 550px;
+}
+
+.title {
+    color: #E5CC14;
+    font-size: 42px;
+    font-weight: 700;
+    margin: 0 0 24px 0;
+    letter-spacing: 2px;
+}
+
+.description {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 16px;
+    line-height: 1.8;
+    margin: 0;
+}
+
+/* Partie droite (card) */
+.cardSection {
+    flex-shrink: 0;
+}
+
+.card {
+    background: rgba(10, 10, 26, 0.8);
+    backdrop-filter: blur(16px);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(229, 204, 20, 0.2);
+    width: 320px;
+}
+
+.cardImage {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.cardContent {
+    padding: 20px;
+}
+
+.cardTitle {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 16px 0;
+    text-align: center;
+}
+
+.cardButton {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background-color: #E5CC14;
+    color: #1a1a2e;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.cardButton:hover {
+    background-color: #d4bb13;
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .container {
+        padding: 60px 40px;
+    }
+
+    .content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .textSection {
+        max-width: 100%;
+    }
+
+    .title {
+        font-size: 32px;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 500px) {
+    .container {
+        padding: 40px 20px;
+    }
+
+    .title {
+        font-size: 26px;
+    }
+
+    .description {
+        font-size: 14px;
+    }
+}

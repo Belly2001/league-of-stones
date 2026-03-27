@@ -1,6 +1,6 @@
 // Page Participer - Gère l'affichage de Participer ou Demande
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 // Composants
@@ -22,8 +22,59 @@ export default function ParticiperPage() {
 
     // States pour Demande
     const [participants, setParticipants] = useState([]);
+    const [receivedRequests, setReceivedRequests] = useState([]);
     const [isLoadingList, setIsLoadingList] = useState(false);
     const [listError, setListError] = useState('');
+
+    // Vérifier périodiquement si un match a été créé
+    useEffect(() => {
+        if (!hasJoined) return;
+
+        const checkMatch = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) return;
+
+                const response = await fetch('http://localhost:3001/matchmaking/participate', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'www-authenticate': token
+                    }
+                });
+
+                const text = await response.text();
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch {
+                    return;
+                }
+
+                console.log('Check match:', data);
+
+                // Si un match existe, rediriger vers BuildDeck
+                if (data.match) {
+                    router.push('/buildDeck');
+                }
+
+                // Mettre à jour les demandes reçues
+                if (data.request && Array.isArray(data.request)) {
+                    setReceivedRequests(data.request);
+                }
+
+            } catch (err) {
+                console.error('Erreur check match:', err);
+            }
+        };
+
+        // Vérifier toutes les 3 secondes
+        const interval = setInterval(checkMatch, 3000);
+
+        // Nettoyer l'intervalle quand le composant se démonte
+        return () => clearInterval(interval);
+
+    }, [hasJoined, router]);
 
     // Fonction pour rejoindre le matchmaking
     const handleJoin = async () => {
@@ -46,13 +97,33 @@ export default function ParticiperPage() {
                 }
             });
 
-            const data = await response.json();
+            const text = await response.text();
+            let data;
+            try {
+                data = JSON.parse(text);
+            } catch {
+                data = { message: text };
+            }
 
-            if (response.ok || !data.message) {
+            console.log('Réponse participate:', data);
+
+            if (response.ok) {
+                // Si un match existe déjà, rediriger
+                if (data.match) {
+                    router.push('/buildDeck');
+                    return;
+                }
+
                 setHasJoined(true);
+                
+                // Stocker les demandes reçues
+                if (data.request && Array.isArray(data.request)) {
+                    setReceivedRequests(data.request);
+                }
+                
                 fetchParticipants();
             } else {
-                setJoinError(data.message);
+                setJoinError(data.message || 'Erreur');
             }
 
         } catch (err) {
@@ -70,6 +141,7 @@ export default function ParticiperPage() {
         try {
             const token = localStorage.getItem('token');
 
+            // Récupérer les participants
             const response = await fetch('http://localhost:3001/matchmaking/getAll', {
                 method: 'GET',
                 headers: {
@@ -78,14 +150,47 @@ export default function ParticiperPage() {
                 }
             });
 
-            const data = await response.json();
+            const text = await response.text();
+            let data;
+            try {
+                data = JSON.parse(text);
+            } catch {
+                data = [];
+            }
+
+            console.log('Participants reçus:', data);
 
             if (Array.isArray(data)) {
                 setParticipants(data);
             } else if (data.data && Array.isArray(data.data)) {
                 setParticipants(data.data);
-            } else if (data.message) {
-                setListError(data.message);
+            }
+
+            // Récupérer aussi les demandes reçues
+            const responseParticipate = await fetch('http://localhost:3001/matchmaking/participate', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'www-authenticate': token
+                }
+            });
+
+            const textParticipate = await responseParticipate.text();
+            let dataParticipate;
+            try {
+                dataParticipate = JSON.parse(textParticipate);
+            } catch {
+                dataParticipate = {};
+            }
+
+            // Si un match existe, rediriger
+            if (dataParticipate.match) {
+                router.push('/buildDeck');
+                return;
+            }
+
+            if (dataParticipate.request && Array.isArray(dataParticipate.request)) {
+                setReceivedRequests(dataParticipate.request);
             }
 
         } catch (err) {
@@ -106,6 +211,7 @@ export default function ParticiperPage() {
             ) : (
                 <Demande 
                     participants={participants}
+                    receivedRequests={receivedRequests}
                     isLoading={isLoadingList}
                     error={listError}
                     onRefresh={fetchParticipants}

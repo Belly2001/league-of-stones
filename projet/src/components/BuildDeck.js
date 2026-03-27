@@ -40,6 +40,8 @@ export default function BuildDeck() {
                 return;
             }
 
+            console.log('Appel de /cards...');
+
             const response = await fetch('http://localhost:3001/cards', {
                 method: 'GET',
                 headers: {
@@ -48,15 +50,29 @@ export default function BuildDeck() {
                 }
             });
 
-            const data = await response.json();
+            const text = await response.text();
+            
+            let data;
+            try {
+                data = JSON.parse(text);
+            } catch {
+                setError('Réponse invalide du serveur');
+                return;
+            }
 
-            if (data.data) {
+            console.log('Cartes reçues:', data);
+
+            // Gérer différents formats de réponse
+            if (Array.isArray(data)) {
+                setAllCards(data);
+            } else if (data.data && Array.isArray(data.data)) {
                 setAllCards(data.data);
             } else if (data.message) {
                 setError(data.message);
             }
 
         } catch (err) {
+            console.error('Erreur fetchCards:', err);
             setError('Impossible de charger les cartes.');
         } finally {
             setIsLoading(false);
@@ -68,20 +84,23 @@ export default function BuildDeck() {
         if (deck.length >= MAX_DECK_SIZE) return;
 
         // Vérifier si la carte est déjà dans le deck
-        const isAlreadyInDeck = deck.some(c => c.id === card.id);
+        const cardId = card._id || card.id;
+        const isAlreadyInDeck = deck.some(c => (c._id || c.id) === cardId);
         if (isAlreadyInDeck) return;
 
         setDeck(prev => [...prev, card]);
     };
 
     // Retirer une carte du deck
-    const removeFromDeck = (cardId) => {
-        setDeck(prev => prev.filter(c => c.id !== cardId));
+    const removeFromDeck = (card) => {
+        const cardId = card._id || card.id;
+        setDeck(prev => prev.filter(c => (c._id || c.id) !== cardId));
     };
 
     // Vérifier si une carte est dans le deck
-    const isInDeck = (cardId) => {
-        return deck.some(c => c.id === cardId);
+    const isInDeck = (card) => {
+        const cardId = card._id || card.id;
+        return deck.some(c => (c._id || c.id) === cardId);
     };
 
     // Filtrer les cartes par recherche
@@ -95,7 +114,7 @@ export default function BuildDeck() {
 
         try {
             const token = localStorage.getItem('token');
-            const deckIds = deck.map(card => card.id);
+            const deckIds = deck.map(card => card._id || card.id);
 
             const response = await fetch('http://localhost:3001/match/initDeck', {
                 method: 'POST',
@@ -106,12 +125,19 @@ export default function BuildDeck() {
                 body: JSON.stringify({ deck: deckIds })
             });
 
-            const data = await response.json();
+            const text = await response.text();
+            console.log('Réponse initDeck:', text);
 
-            if (data.data) {
-                router.push('/matchmaking');
-            } else if (data.message) {
-                setError(data.message);
+            if (response.ok) {
+                router.push('/match');
+            } else {
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch {
+                    data = { message: text };
+                }
+                setError(data.message || 'Erreur lors de la validation du deck.');
             }
 
         } catch (err) {
@@ -120,8 +146,23 @@ export default function BuildDeck() {
     };
 
     // Générer l'URL de l'image du champion
-    const getChampionImage = (championKey) => {
-        return `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${championKey}_0.jpg`;
+    const getChampionImage = (card) => {
+        const key = card.key || card.name;
+        return `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${key}_0.jpg`;
+    };
+
+    // Obtenir l'attaque d'une carte
+    const getAttack = (card) => {
+        if (card.info && card.info.attack !== undefined) return card.info.attack;
+        if (card.atk !== undefined) return card.atk;
+        return '?';
+    };
+
+    // Obtenir la défense d'une carte
+    const getDefense = (card) => {
+        if (card.info && card.info.defense !== undefined) return card.info.defense;
+        if (card.def !== undefined) return card.def;
+        return '?';
     };
 
     return (
@@ -185,12 +226,12 @@ export default function BuildDeck() {
                             <div className={styles.cardsGrid}>
                                 {filteredCards.map(card => (
                                     <div
-                                        key={card.id}
-                                        className={`${styles.card} ${isInDeck(card.id) ? styles.cardSelected : ''}`}
+                                        key={card._id || card.id}
+                                        className={`${styles.card} ${isInDeck(card) ? styles.cardSelected : ''}`}
                                         onClick={() => addToDeck(card)}
                                     >
                                         <img
-                                            src={getChampionImage(card.key || card.name)}
+                                            src={getChampionImage(card)}
                                             alt={card.name}
                                             className={styles.cardImage}
                                         />
@@ -198,10 +239,10 @@ export default function BuildDeck() {
                                             <p className={styles.cardName}>{card.name}</p>
                                             <div className={styles.cardStats}>
                                                 <span className={`${styles.stat} ${styles.statAtk}`}>
-                                                    ⚔️ {card.atk}
+                                                    ⚔️ {getAttack(card)}
                                                 </span>
                                                 <span className={`${styles.stat} ${styles.statDef}`}>
-                                                    🛡️ {card.def}
+                                                    🛡️ {getDefense(card)}
                                                 </span>
                                             </div>
                                         </div>
@@ -230,22 +271,22 @@ export default function BuildDeck() {
                         ) : (
                             <div className={styles.deckCards}>
                                 {deck.map(card => (
-                                    <div key={card.id} className={styles.deckCard}>
+                                    <div key={card._id || card.id} className={styles.deckCard}>
                                         <img
-                                            src={getChampionImage(card.key || card.name)}
+                                            src={getChampionImage(card)}
                                             alt={card.name}
                                             className={styles.deckCardImage}
                                         />
                                         <div className={styles.deckCardInfo}>
                                             <p className={styles.deckCardName}>{card.name}</p>
                                             <div className={styles.deckCardStats}>
-                                                <span className={styles.statAtk}>⚔️ {card.atk}</span>
-                                                <span className={styles.statDef}>🛡️ {card.def}</span>
+                                                <span className={styles.statAtk}>⚔️ {getAttack(card)}</span>
+                                                <span className={styles.statDef}>🛡️ {getDefense(card)}</span>
                                             </div>
                                         </div>
                                         <button
                                             className={styles.removeButton}
-                                            onClick={() => removeFromDeck(card.id)}
+                                            onClick={() => removeFromDeck(card)}
                                         >
                                             <FaTimes />
                                         </button>

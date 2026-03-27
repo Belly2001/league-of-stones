@@ -354,6 +354,64 @@
     text-align: center;
 }
 
+/* Section Demandes Reçues */
+.receivedSection {
+    background: rgba(229, 204, 20, 0.1);
+    border: 1px solid rgba(229, 204, 20, 0.3);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 24px;
+}
+
+.receivedTitle {
+    color: #E5CC14;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.receivedTitleIcon {
+    font-size: 18px;
+}
+
+.receivedList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.receivedItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    border: 1px solid rgba(229, 204, 20, 0.2);
+}
+
+/* Bouton Accepter (vert) */
+.btnAccept {
+    padding: 10px 20px;
+    background-color: #10b981;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    min-width: 100px;
+}
+
+.btnAccept:hover {
+    background-color: #0ea472;
+    transform: translateY(-1px);
+}
+
 /* Responsive */
 @media (max-width: 600px) {
     .card {

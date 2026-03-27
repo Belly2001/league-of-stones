@@ -1,81 +1,109 @@
-// Composant Demande - Liste des joueurs disponibles
+// Composant Demande - Liste des joueurs disponibles + Demandes reçues
 
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 // React Icons
-import { FaUsers, FaSync, FaArrowLeft } from 'react-icons/fa';
+import { FaUsers, FaSync, FaArrowLeft, FaInbox } from 'react-icons/fa';
 import { GiCrossedSwords } from 'react-icons/gi';
 
 // Styles
 import styles from '../styles/Matchmaking.module.css';
 
-export default function Demande({ participants, isLoading, error, onRefresh }) {
+export default function Demande({ participants, receivedRequests = [], isLoading, error, onRefresh }) {
     const router = useRouter();
 
-    // État des demandes : { odUserId: 'pending' | 'accepted' | null }
+    // État des demandes envoyées
     const [requests, setRequests] = useState({});
     const [localError, setLocalError] = useState('');
 
     // Envoyer une demande à un joueur
-    const sendRequest = async (userId) => {
+    // Envoyer une demande à un joueur
+    const sendRequest = async (matchmakingId) => {
+        // Empêcher les demandes multiples
+        if (requests[matchmakingId] === 'pending') return;
+
+        // Marquer comme pending immédiatement
+        setRequests(prev => ({ ...prev, [matchmakingId]: 'pending' }));
+
         try {
             const token = localStorage.getItem('token');
 
-            const response = await fetch('http://localhost:3001/matchmaking/request', {
-                method: 'POST',
+            const response = await fetch(`http://localhost:3001/matchmaking/request?matchmakingId=${matchmakingId}`, {
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                     'www-authenticate': token
-                },
-                body: JSON.stringify({ odUserId: userId })
+                }
             });
 
-            const data = await response.json();
+            const text = await response.text();
+            console.log('Réponse request:', text);
 
-            if (response.ok) {
-                setRequests(prev => ({ ...prev, [userId]: 'pending' }));
-            } else {
+            if (!response.ok) {
+                // Si erreur, remettre le bouton "Demander"
+                setRequests(prev => {
+                    const updated = { ...prev };
+                    delete updated[matchmakingId];
+                    return updated;
+                });
+
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch {
+                    data = { message: text };
+                }
                 setLocalError(data.message || 'Erreur lors de l\'envoi.');
             }
 
         } catch (err) {
+            console.error('Erreur:', err);
+            setRequests(prev => {
+                const updated = { ...prev };
+                delete updated[matchmakingId];
+                return updated;
+            });
             setLocalError('Erreur de connexion.');
         }
     };
 
     // Annuler une demande
-    const cancelRequest = (userId) => {
+    const cancelRequest = (matchmakingId) => {
         setRequests(prev => {
             const updated = { ...prev };
-            delete updated[userId];
+            delete updated[matchmakingId];
             return updated;
         });
     };
 
-    // Accepter une demande
-    const acceptRequest = async (userId) => {
+    // Accepter une demande reçue
+    const acceptRequest = async (matchmakingId) => {
         try {
             const token = localStorage.getItem('token');
 
-            const response = await fetch('http://localhost:3001/matchmaking/acceptRequest', {
-                method: 'POST',
+            const response = await fetch(`http://localhost:3001/matchmaking/acceptRequest?matchmakingId=${matchmakingId}`, {
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                     'www-authenticate': token
-                },
-                body: JSON.stringify({ odUserId: userId })
+                }
             });
 
-            const data = await response.json();
+            const text = await response.text();
+            console.log('Réponse acceptRequest:', text);
 
             if (response.ok) {
-                setRequests(prev => ({ ...prev, [userId]: 'accepted' }));
-                setTimeout(() => {
-                    router.push('/buildDeck');
-                }, 1500);
+                // Rediriger vers le buildDeck
+                router.push('/buildDeck');
             } else {
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch {
+                    data = { message: text };
+                }
                 setLocalError(data.message || 'Erreur.');
             }
 
@@ -90,19 +118,16 @@ export default function Demande({ participants, isLoading, error, onRefresh }) {
         return name.charAt(0).toUpperCase();
     };
 
-    // Afficher le bon bouton selon l'état
+    // Afficher le bon bouton selon l'état (pour les joueurs disponibles)
     const renderButton = (participant) => {
-        const status = requests[participant.id];
-
-        if (status === 'accepted') {
-            return <button className={styles.btnAccepted}>Accepté(e)</button>;
-        }
+        const matchmakingId = participant.matchmakingId;
+        const status = requests[matchmakingId];
 
         if (status === 'pending') {
             return (
                 <button 
                     className={styles.btnCancel}
-                    onClick={() => cancelRequest(participant.id)}
+                    onClick={() => cancelRequest(matchmakingId)}
                 >
                     Annuler
                 </button>
@@ -112,7 +137,7 @@ export default function Demande({ participants, isLoading, error, onRefresh }) {
         return (
             <button 
                 className={styles.btnYellow}
-                onClick={() => sendRequest(participant.id)}
+                onClick={() => sendRequest(matchmakingId)}
             >
                 Demander
             </button>
@@ -140,7 +165,38 @@ export default function Demande({ participants, isLoading, error, onRefresh }) {
                 <div className={styles.error}>{error || localError}</div>
             )}
 
-            {/* Contenu */}
+            {/* Section Demandes Reçues */}
+            {receivedRequests.length > 0 && (
+                <div className={styles.receivedSection}>
+                    <h2 className={styles.receivedTitle}>
+                        <FaInbox className={styles.receivedTitleIcon} />
+                        Demandes reçues ({receivedRequests.length})
+                    </h2>
+                    <div className={styles.receivedList}>
+                        {receivedRequests.map((request, index) => (
+                            <div key={index} className={styles.receivedItem}>
+                                <div className={styles.participantInfo}>
+                                    <div className={styles.participantAvatar}>
+                                        {getInitials(request.name)}
+                                    </div>
+                                    <div>
+                                        <p className={styles.participantName}>{request.name}</p>
+                                        <p className={styles.participantEmail}>Veut jouer avec vous</p>
+                                    </div>
+                                </div>
+                                <button 
+                                    className={styles.btnAccept}
+                                    onClick={() => acceptRequest(request.matchmakingId)}
+                                >
+                                    Accepter
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {/* Contenu - Liste des joueurs */}
             {isLoading ? (
                 <div className={styles.loading}>
                     <div className={styles.spinner}></div>
@@ -157,7 +213,7 @@ export default function Demande({ participants, isLoading, error, onRefresh }) {
             ) : (
                 <div className={styles.participantsList}>
                     {participants.map(participant => (
-                        <div key={participant.id} className={styles.participant}>
+                        <div key={participant.matchmakingId} className={styles.participant}>
                             <div className={styles.participantInfo}>
                                 <div className={styles.participantAvatar}>
                                     {getInitials(participant.name)}

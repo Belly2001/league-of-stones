@@ -14,6 +14,7 @@ export default function Presentation() {
                         League Of Stones est un mashup de deux jeux vidéos. Utilisant le système de jeu de Hearthstone (HS) 
                         développé par Blizzard™ nous intégrerons les données ouvertes du jeu 
                         League Of Legends (LoL) développé par Riot Games.
+                        lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut gravida lorem. Ut turpis felis, pulvinar a semper sed, adipiscing id dolor.
                     </p>
                 </div>
 
@@ -27,6 +28,7 @@ export default function Presentation() {
                         />
                         <div className={styles.cardContent}>
                             <h3 className={styles.cardTitle}>Découvrez Hearthstone</h3>
+                            <p>lore ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula </p>
                             <a 
                                 href="https://hearthstone.blizzard.com/fr-fr" 
                                 target="_blank" 

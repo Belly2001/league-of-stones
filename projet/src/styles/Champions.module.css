@@ -3,8 +3,12 @@
 .container {
     padding: 80px 0;
     background-image: url('/image/image10.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
     overflow: hidden;
 }
+
 
 .title {
     color: #E5CC14;

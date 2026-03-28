@@ -1,38 +1,53 @@
+// Composant Champions - Carrousel des champions
+
 import styles from '../styles/Champions.module.css';
 
 export default function Champions() {
+    // Liste des champions (clé pour l'image)
     const champions = [
-        { name: "Aatrox", attack: 8, defense: 4, key: "Aatrox" },
-        { name: "Ahri", attack: 3, defense: 4, key: "Ahri" },
-        { name: "Teemo", attack: 5, defense: 3, key: "Teemo" },
-        { name: "Thresh", attack: 6, defense: 6, key: "Thresh" }
+        'Ahri',
+        'Akali',
+        'Yasuo',
+        'Zed',
+        'Lux',
+        'Jinx',
+        'LeeSin',
+        'Thresh',
+        'Vayne',
+        'Riven',
+        'Katarina',
+        'Darius',
+        'Garen',
+        'Teemo',
+        'Ezreal',
+        'Ashe'
     ];
 
+    // Générer l'URL de l'image
+    const getImage = (champion) => {
+        return `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion}_0.jpg`;
+    };
+
+    // Doubler la liste pour créer l'effet infini
+    const allChampions = [...champions, ...champions];
+
     return (
-        <section id="champions" className={styles.section}>
-            <h2 className={styles.title}>Aperçu des champions</h2>
-            
-            <div className={styles.championsGrid}>
-                {champions.map((champion) => (
-                    <div key={champion.key} className={styles.card}>
-                        <div className={styles.cardImage}>
-                            <img 
-                                src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.key}_0.jpg`}
-                                alt={champion.name}
+        <section id="champions" className={styles.container}>
+            <h2 className={styles.title}>Nos Champions</h2>
+
+            <div className={styles.carousel}>
+                <div className={styles.track}>
+                    {allChampions.map((champion, index) => (
+                        <div key={index} className={styles.card}>
+                            <img
+                                src={getImage(champion)}
+                                alt={champion}
+                                className={styles.cardImage}
                             />
                         </div>
-                        <div className={styles.cardInfo}>
-                            <h3 className={styles.cardName}>{champion.name}</h3>
-                            <div className={styles.cardStats}>
-                                <span className={styles.statAttack}>⚔️ {champion.attack}</span>
-                                <span className={styles.statDefense}>🛡️ {champion.defense}</span>
-                            </div>
-                        </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
-            
-            <p className={styles.moreChampions}>+ de 150 champions disponibles</p>
         </section>
     );
 }

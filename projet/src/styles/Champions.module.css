@@ -1,91 +1,78 @@
-.section {
-    background-color: #0a0a1a;
-    padding: 80px 40px;
+/* Styles Champions - Carrousel */
+
+.container {
+    padding: 80px 0;
+    background-image: url('/image/image10.jpg');
+    overflow: hidden;
 }
 
 .title {
     color: #E5CC14;
-    font-size: 28px;
-    font-weight: 600;
+    font-size: 32px;
+    font-weight: 700;
     text-align: center;
-    margin: 0 0 48px 0;
+    margin: 0 0 40px 0;
 }
 
-.championsGrid {
+/* Carrousel */
+.carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Piste du carrousel - défile en continu */
+.track {
     display: flex;
-    gap: 24px;
-    justify-content: center;
-    flex-wrap: wrap;
-    max-width: 800px;
-    margin: 0 auto;
+    gap: 20px;
+    animation: scroll 30s linear infinite;
 }
 
+/* Animation de défilement vers la gauche */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Pause au survol */
+.track:hover {
+    animation-play-state: paused;
+}
+
+/* Chaque carte */
 .card {
-    width: 140px;
-    background-color: #1a1a2e;
+    flex-shrink: 0;
+    width: 200px;
+    height: 280px;
     border-radius: 12px;
     overflow: hidden;
-    border: 2px solid #E5CC14;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid rgba(229, 204, 20, 0.3);
+    transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 32px rgba(229, 204, 20, 0.2);
+    transform: scale(1.05);
+    border-color: #E5CC14;
 }
 
 .cardImage {
-    width: 100%;
-    height: 100px;
-    background: linear-gradient(135deg, #3a3a5e, #2a2a4e);
-}
-
-.cardImage img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.cardInfo {
-    padding: 12px;
-    text-align: center;
-}
-
-.cardName {
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 500;
-    margin: 0 0 8px 0;
-}
-
-.cardStats {
-    display: flex;
-    justify-content: space-between;
-}
-
-.statAttack {
-    color: #ff6b6b;
-    font-size: 12px;
-}
-
-.statDefense {
-    color: #4ecdc4;
-    font-size: 12px;
-}
-
-.moreChampions {
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 13px;
-    text-align: center;
-    margin: 32px 0 0 0;
-}
-
-@media (max-width: 600px) {
-    .championsGrid {
-        gap: 16px;
+/* Responsive */
+@media (max-width: 768px) {
+    .card {
+        width: 150px;
+        height: 210px;
     }
 
-    .card {
-        width: 120px;
+    .title {
+        font-size: 26px;
     }
 }

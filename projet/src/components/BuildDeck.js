@@ -114,15 +114,21 @@ export default function BuildDeck() {
 
         try {
             const token = localStorage.getItem('token');
+            
+            // Créer un tableau des IDs
             const deckIds = deck.map(card => card._id || card.id);
+            
+            // Convertir en JSON string pour l'URL
+            const deckJson = JSON.stringify(deckIds);
 
-            const response = await fetch('http://localhost:3001/match/initDeck', {
-                method: 'POST',
+            console.log('Deck envoyé:', deckJson);
+
+            const response = await fetch(`http://localhost:3001/match/initDeck?deck=${encodeURIComponent(deckJson)}`, {
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                     'www-authenticate': token
-                },
-                body: JSON.stringify({ deck: deckIds })
+                }
             });
 
             const text = await response.text();
@@ -141,6 +147,7 @@ export default function BuildDeck() {
             }
 
         } catch (err) {
+            console.error('Erreur validateDeck:', err);
             setError('Erreur lors de la validation du deck.');
         }
     };

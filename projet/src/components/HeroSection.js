@@ -20,12 +20,12 @@ export default function HeroSection() {
             {/* Contenu texte aligné à gauche */}
             <div className={styles.heroContent}>
                 <span className={styles.heroTag}>Jeu de cartes stratégique</span>
-                
+
                 <h1 className={styles.heroTitle}>League of Stones</h1>
-                
+
                 <p className={styles.heroDescription}>
-                    Affrontez vos adversaires avec les champions de League of Legends 
-                    dans des duels de cartes épiques. Construisez votre deck et 
+                    Affrontez vos adversaires avec les champions de League of Legends
+                    dans des duels de cartes épiques. Construisez votre deck et
                     prouvez votre valeur.
                 </p>
 

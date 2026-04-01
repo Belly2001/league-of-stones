@@ -27,7 +27,10 @@ export default function Features() {
     ];
 
     return (
-        <section className={styles.section}>
+        <section
+            className={styles.section}
+        >
+            <div className={styles.overlay} />
             <h2 className={styles.title}>Fonctionnalités</h2>
             
             <div className={styles.featuresGrid}>

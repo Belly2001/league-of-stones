@@ -1,5 +1,9 @@
 .section {
-    background-color: #0f0f1f;
+    background-image: url('/image/fonctionnalite.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
     padding: 80px 40px;
 }
 

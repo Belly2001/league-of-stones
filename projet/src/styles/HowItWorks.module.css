@@ -29,7 +29,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.500);
+    background: rgba(0, 0, 0, 0.564);
     z-index: 2;
 }
 
@@ -37,7 +37,7 @@
 .content {
     position: relative;
     z-index: 3;
-    max-width: 1000px;
+    max-width: 1100px;
     width: 100%;
     text-align: center;
 }
@@ -47,10 +47,11 @@
     font-size: 36px;
     font-weight: 700;
     margin: 0 0 9px 0;
+    text-shadow: 0 0 20px rgba(229, 204, 20, 0.5);
 }
 
 .subtitle {
-    color: rgba(255, 255, 255, 0.7);
+    color: #ffffff;
     font-size: 16px;
     margin: 0 0 50px 0;
 }
@@ -59,50 +60,113 @@
 .steps {
     display: flex;
     justify-content: center;
-    gap: 40px;
+    gap: 30px;
     flex-wrap: wrap;
 }
 
-.step {
-    background: rgba(10, 10, 26, 0.8);
+/* Container de la carte (pour la perspective) */
+.cardContainer {
+    width: 240px;
+    height: 280px;
+    perspective: 1000px;
+}
+
+/* La carte qui tourne */
+.card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
+}
+
+/* Au survol, la carte tourne */
+.cardContainer:hover .card {
+    transform: rotateY(180deg);
+}
+
+/* Face avant et arrière */
+.cardFront,
+.cardBack {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Face avant */
+.cardFront {
+    background: rgba(10, 10, 26, 0.85);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(229, 204, 20, 0.2);
-    border-radius: 16px;
-    padding: 30px;
-    width: 250px;
-    text-align: center;
-    transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.step:hover {
-    transform: translateY(-8px);
-    border-color: #E5CC14;
+/* Face arrière */
+.cardBack {
+    background: linear-gradient(135deg, #E5CC14 0%, #d4bb13 100%);
+    border: 1px solid #E5CC14;
+    transform: rotateY(180deg);
 }
 
-.stepNumber {
-    width: 50px;
-    height: 50px;
+/* Icône de l'étape (face avant) */
+.stepIcon {
+    width: 60px;
+    height: 60px;
     background: #E5CC14;
     color: #0a0a1a;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
-    font-weight: 700;
-    margin: 0 auto 20px auto;
+    font-size: 28px;
+    margin-bottom: 20px;
 }
 
 .stepTitle {
     color: #ffffff;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 600;
     margin: 0 0 12px 0;
 }
 
 .stepDescription {
     color: rgba(255, 255, 255, 0.6);
-    font-size: 14px;
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Face arrière - styles */
+.backIcon {
+    width: 60px;
+    height: 60px;
+    background: #0a0a1a;
+    color: #E5CC14;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin-bottom: 16px;
+}
+
+.backTitle {
+    color: #0a0a1a;
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+}
+
+.backInfo {
+    color: #1a1a2e;
+    font-size: 13px;
     line-height: 1.6;
     margin: 0;
 }
@@ -123,8 +187,16 @@
         gap: 24px;
     }
 
-    .step {
+    .cardContainer {
         width: 100%;
-        max-width: 300px;
+        max-width: 280px;
+    }
+
+    .bottomText {
+         margin-top: 100px;
+        color: #ffffff;
+        font-size: 14px;
+        line-height: 1.8;
+        text-align: center;
     }
 }

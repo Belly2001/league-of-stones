@@ -1,0 +1,464 @@
+/* Styles Match - Combat */
+
+/* Container principal */
+.container {
+    min-height: 100vh;
+    background-image: url('/images/image4.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+}
+
+/* Overlay sombre */
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 1;
+}
+
+/* Contenu */
+.content {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header avec infos du match */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.turnInfo {
+    background: rgba(229, 204, 20, 0.2);
+    border: 1px solid #E5CC14;
+    border-radius: 8px;
+    padding: 10px 20px;
+    color: #E5CC14;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+
+.backButton:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Zone des plateaux */
+.battleArea {
+    display: flex;
+    gap: 30px;
+    flex: 1;
+    margin-bottom: 20px;
+}
+
+/* Plateau joueur (gauche ou droite) */
+.playerZone {
+    flex: 1;
+    background: rgba(10, 10, 26, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.myZone {
+    border-color: rgba(229, 204, 20, 0.3);
+}
+
+.enemyZone {
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+/* Info du joueur */
+.playerInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.playerName {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.playerStats {
+    display: flex;
+    gap: 16px;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+}
+
+.statHp {
+    color: #ef4444;
+}
+
+.statDeck {
+    color: #3b82f6;
+}
+
+/* Titre du plateau */
+.boardTitle {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 12px 0;
+    text-align: center;
+}
+
+/* Plateau de cartes */
+.board {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    min-height: 300px;
+}
+
+/* Carte sur le plateau */
+.boardCard {
+    width: 100%;
+    max-width: 150px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.boardCard:hover {
+    transform: scale(1.05);
+    border-color: #E5CC14;
+}
+
+.boardCardSelected {
+    border-color: #E5CC14;
+    box-shadow: 0 0 20px rgba(229, 204, 20, 0.4);
+}
+
+.boardCardCanAttack {
+    border-color: #10b981;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+}
+
+.boardCardImage {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+}
+
+.boardCardInfo {
+    padding: 8px;
+    text-align: center;
+}
+
+.boardCardName {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.boardCardStats {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    font-size: 11px;
+}
+
+.atkStat {
+    color: #ef4444;
+}
+
+.defStat {
+    color: #3b82f6;
+}
+
+/* Message plateau vide */
+.emptyBoard {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 13px;
+    text-align: center;
+}
+
+/* Zone de ma main */
+.handArea {
+    background: rgba(10, 10, 26, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border: 1px solid rgba(229, 204, 20, 0.2);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.handTitle {
+    color: #E5CC14;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hand {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+}
+
+/* Carte dans la main */
+.handCard {
+    flex-shrink: 0;
+    width: 120px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.handCard:hover {
+    transform: translateY(-10px);
+    border-color: #E5CC14;
+}
+
+.handCardImage {
+    width: 100%;
+    height: 70px;
+    object-fit: cover;
+}
+
+.handCardInfo {
+    padding: 8px;
+    text-align: center;
+}
+
+.handCardName {
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.handCardStats {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    font-size: 10px;
+}
+
+/* Zone des boutons */
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.actionBtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.actionBtn:hover:not(:disabled) {
+    transform: translateY(-2px);
+}
+
+.actionBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pickBtn {
+    background: #3b82f6;
+    color: #ffffff;
+}
+
+.pickBtn:hover:not(:disabled) {
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+}
+
+.endTurnBtn {
+    background: #E5CC14;
+    color: #0a0a1a;
+}
+
+.endTurnBtn:hover:not(:disabled) {
+    box-shadow: 0 6px 20px rgba(229, 204, 20, 0.3);
+}
+
+/* Message d'info */
+.infoMessage {
+    flex: 1;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+}
+
+/* Message d'erreur */
+.error {
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+/* Loading */
+.loading {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.6);
+    gap: 16px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(229, 204, 20, 0.2);
+    border-top-color: #E5CC14;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Victoire / Défaite */
+.gameOver {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.gameOverTitle {
+    font-size: 48px;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+}
+
+.victory {
+    color: #E5CC14;
+}
+
+.defeat {
+    color: #ef4444;
+}
+
+.gameOverText {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 18px;
+    margin: 0 0 32px 0;
+}
+
+.gameOverBtn {
+    padding: 14px 32px;
+    background: #E5CC14;
+    color: #0a0a1a;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.gameOverBtn:hover {
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .battleArea {
+        flex-direction: column;
+    }
+
+    .hand {
+        justify-content: flex-start;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .actionBtn {
+        width: 100%;
+        justify-content: center;
+    }
+}

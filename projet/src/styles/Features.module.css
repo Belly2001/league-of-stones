@@ -9,10 +9,11 @@
 
 .title {
     color: #E5CC14;
-    font-size: 28px;
+    font-size: 42px;
     font-weight: 600;
     text-align: center;
     margin: 0 0 48px 0;
+    text-shadow: 0 0 20px rgba(229, 204, 20, 0.5);
 }
 .featureIcon {
     font-size: 2rem;

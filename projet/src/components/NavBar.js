@@ -12,11 +12,17 @@ export default function NavBar() {
 
             {/* Liens de navigation */}
             <div className={styles.navLinks}>
+                <Link href="#presentation" className={styles.navLink}>
+                    Presentation
+                </Link>
                 <Link href="#how-it-works" className={styles.navLink}>
                     Comment jouer
                 </Link>
                 <Link href="#champions" className={styles.navLink}>
                     Champions
+                </Link>
+                <Link href="#features" className={styles.navLink}>
+                    Fonctionnalités
                 </Link>
             </div>
 

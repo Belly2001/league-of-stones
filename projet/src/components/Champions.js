@@ -44,6 +44,9 @@ export default function Champions() {
                                 alt={champion}
                                 className={styles.cardImage}
                             />
+                            <div className={styles.cardOverlay}>
+                                <span className={styles.cardName}>{champion}</span>
+                            </div>
                         </div>
                     ))}
                 </div>

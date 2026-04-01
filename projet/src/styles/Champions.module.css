@@ -9,13 +9,41 @@
     overflow: hidden;
 }
 
+/* Overlay sombre pour lisibilité */
+.container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    pointer-events: none;
+    z-index: 0;
+}
 
+.container > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Titre avec ligne décorative */
 .title {
     color: #E5CC14;
-    font-size: 32px;
+    font-size: 36px;
     font-weight: 700;
     text-align: center;
-    margin: 0 0 40px 0;
+    margin: 0 0 48px 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px rgba(229, 204, 20, 0.5);
+}
+
+.title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #E5CC14, transparent);
+    margin: 12px auto 0;
+    border-radius: 2px;
 }
 
 /* Carrousel */
@@ -23,16 +51,30 @@
     position: relative;
     width: 100%;
     overflow: hidden;
+    /* Fondu sur les bords */
+    mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 8%,
+        black 92%,
+        transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 8%,
+        black 92%,
+        transparent 100%
+    );
 }
 
-/* Piste du carrousel - défile en continu */
+/* Piste du carrousel */
 .track {
     display: flex;
     gap: 20px;
-    animation: scroll 30s linear infinite;
+    animation: scroll 35s linear infinite;
 }
 
-/* Animation de défilement vers la gauche */
 @keyframes scroll {
     0% {
         transform: translateX(0);
@@ -54,19 +96,69 @@
     height: 280px;
     border-radius: 12px;
     overflow: hidden;
-    border: 2px solid rgba(229, 204, 20, 0.3);
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    border: 2px solid rgba(229, 204, 20, 0.25);
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
 .card:hover {
-    transform: scale(1.05);
+    transform: scale(1.08) translateY(-4px);
     border-color: #E5CC14;
+    box-shadow:
+        0 0 20px rgba(229, 204, 20, 0.45),
+        0 8px 30px rgba(0, 0, 0, 0.7);
+    z-index: 10;
 }
 
+/* Image du champion */
 .cardImage {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.card:hover .cardImage {
+    transform: scale(1.08);
+}
+
+/* Overlay dégradé sur la carte */
+.cardOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.85) 0%,
+        rgba(0, 0, 0, 0.1) 50%,
+        transparent 100%
+    );
+    display: flex;
+    align-items: flex-end;
+    padding: 14px 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover .cardOverlay {
+    opacity: 1;
+}
+
+/* Nom du champion */
+.cardName {
+    color: #E5CC14;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+    transform: translateY(6px);
+    transition: transform 0.3s ease;
+}
+
+.card:hover .cardName {
+    transform: translateY(0);
 }
 
 /* Responsive */
@@ -77,6 +169,10 @@
     }
 
     .title {
-        font-size: 26px;
+        font-size: 28px;
+    }
+
+    .cardName {
+        font-size: 13px;
     }
 }

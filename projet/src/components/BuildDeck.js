@@ -109,17 +109,18 @@ export default function BuildDeck() {
     );
 
     // Valider le deck
+    // Valider le deck
     const validateDeck = async () => {
         if (deck.length !== MAX_DECK_SIZE) return;
 
         try {
             const token = localStorage.getItem('token');
             
-            // Créer un tableau des IDs
-            const deckIds = deck.map(card => card._id || card.id);
+            // Créer un tableau des cartes avec leur key
+            const deckKeys = deck.map(card => ({ key: card.key }));
             
             // Convertir en JSON string pour l'URL
-            const deckJson = JSON.stringify(deckIds);
+            const deckJson = JSON.stringify(deckKeys);
 
             console.log('Deck envoyé:', deckJson);
 
@@ -135,7 +136,9 @@ export default function BuildDeck() {
             console.log('Réponse initDeck:', text);
 
             if (response.ok) {
-                router.push('/match');
+                // Attendre et vérifier si le match est prêt
+                setError('');
+                checkIfMatchReady();
             } else {
                 let data;
                 try {
@@ -151,6 +154,57 @@ export default function BuildDeck() {
             setError('Erreur lors de la validation du deck.');
         }
     };
+
+    // Vérifier si le match est prêt
+    const checkIfMatchReady = async () => {
+        const token = localStorage.getItem('token');
+
+        const check = async () => {
+            try {
+                const response = await fetch('http://localhost:3001/match/getMatch', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'www-authenticate': token
+                    }
+                });
+
+                const text = await response.text();
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch {
+                    return false;
+                }
+
+                console.log('Match status:', data.status);
+
+                // Si le statut contient "Turn", le match a commencé
+                if (data.status && data.status.includes('Turn')) {
+                    router.push('/match');
+                    return true;
+                }
+
+                return false;
+
+            } catch (err) {
+                return false;
+            }
+        };
+
+        // Vérifier immédiatement
+        const ready = await check();
+        if (ready) return;
+
+        // Sinon vérifier toutes les 2 secondes
+        const interval = setInterval(async () => {
+            const ready = await check();
+            if (ready) {
+                clearInterval(interval);
+            }
+        }, 2000);
+    };
+
 
     // Générer l'URL de l'image du champion
     const getChampionImage = (card) => {

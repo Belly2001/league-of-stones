@@ -52,10 +52,6 @@
     z-index: 1;
 }
 
-.container:hover .textSection {
-    opacity: 1;
-    transform: translateX(0);
-}
 .container:hover .cardSection {
     opacity: 1;
     transform: translateX(0);
@@ -78,9 +74,6 @@
 .textSection {
     flex: 1;
     max-width: 550px;
-    opacity: 0;
-    transform: translateX(-60px); /* gauche */
-    transition: all 0.6s ease;
 
 }
 

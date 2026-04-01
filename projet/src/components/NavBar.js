@@ -1,12 +1,13 @@
 import styles from '../styles/NavBar.module.css';
 import Link from 'next/link';
+import { GiCrossedSwords } from 'react-icons/gi';
 
 export default function NavBar() {
     return (
         <nav className={styles.navbar}>
             {/* Logo */}
             <Link href="/" className={styles.logo}>
-                ⚔️ League of Stones
+                <GiCrossedSwords /> League of Stones
             </Link>
 
             {/* Liens de navigation */}

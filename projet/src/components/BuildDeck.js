@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 
 // React Icons
 import { FaArrowLeft, FaSearch, FaTimes, FaCheck } from 'react-icons/fa';
-import { GiCardPick, GiCrossedSwords } from 'react-icons/gi';
+import { GiCardPick, GiCrossedSwords, GiShield } from 'react-icons/gi';
 import { BsCollectionFill } from 'react-icons/bs';
 
 // Styles
@@ -246,10 +246,10 @@ export default function BuildDeck() {
                                             <p className={styles.cardName}>{card.name}</p>
                                             <div className={styles.cardStats}>
                                                 <span className={`${styles.stat} ${styles.statAtk}`}>
-                                                    ⚔️ {getAttack(card)}
+                                                    <GiCrossedSwords /> {getAttack(card)}
                                                 </span>
                                                 <span className={`${styles.stat} ${styles.statDef}`}>
-                                                    🛡️ {getDefense(card)}
+                                                    <GiShield /> {getDefense(card)}
                                                 </span>
                                             </div>
                                         </div>
@@ -287,8 +287,8 @@ export default function BuildDeck() {
                                         <div className={styles.deckCardInfo}>
                                             <p className={styles.deckCardName}>{card.name}</p>
                                             <div className={styles.deckCardStats}>
-                                                <span className={styles.statAtk}>⚔️ {getAttack(card)}</span>
-                                                <span className={styles.statDef}>🛡️ {getDefense(card)}</span>
+                                                <span className={styles.statAtk}><GiCrossedSwords /> {getAttack(card)}</span>
+                                                <span className={styles.statDef}><GiShield /> {getDefense(card)}</span>
                                             </div>
                                         </div>
                                         <button

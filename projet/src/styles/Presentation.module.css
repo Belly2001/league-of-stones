@@ -1,4 +1,25 @@
 /* Styles Presentation */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(60px); /* 👉 depuis la droite */
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
 
 /* Container principal avec image de fond */
 .container {
@@ -31,6 +52,15 @@
     z-index: 1;
 }
 
+.container:hover .textSection {
+    opacity: 1;
+    transform: translateX(0);
+}
+.container:hover .cardSection {
+    opacity: 1;
+    transform: translateX(0);
+}
+
 /* Contenu */
 .content {
     position: relative;
@@ -48,6 +78,10 @@
 .textSection {
     flex: 1;
     max-width: 550px;
+    opacity: 0;
+    transform: translateX(-60px); /* gauche */
+    transition: all 0.6s ease;
+
 }
 
 .title {
@@ -56,8 +90,11 @@
     font-weight: 700;
     margin: 0 0 24px 0;
     letter-spacing: 2px;
-    text-shadow: 0 0 20px rgba(229, 204, 20, 0.5);
+    text-shadow: 0 0 20px rgba(229, 204, 20, 0.5);    
 }
+
+
+
 
 .description {
     color: rgba(255, 255, 255, 0.85);
@@ -69,6 +106,10 @@
 /* Partie droite (card) */
 .cardSection {
     flex-shrink: 0;
+    opacity: 0;
+    transform: translateX(60px); /* gauche */
+    transition: all 0.6s ease;
+
 }
 
 .card {

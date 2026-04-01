@@ -33,7 +33,7 @@
     margin: 0 0 48px 0;
     letter-spacing: 2px;
     text-transform: uppercase;
-    text-shadow: 0 0 20px rgba(229, 204, 20, 0.5);
+    text-shadow: 0 0 20px rgba(243, 217, 16, 0.5);
 }
 
 .title::after {

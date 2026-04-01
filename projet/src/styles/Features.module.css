@@ -28,7 +28,7 @@
 
 .feature:hover .featureIcon {
     transform: scale(1.15);
-    filter: drop-shadow(0 0 12px rgba(229, 204, 20, 0.8));
+    filter: drop-shadow(0 0 12px rgba(237, 210, 6, 0.8));
 }
 .featuresGrid {
     display: grid;

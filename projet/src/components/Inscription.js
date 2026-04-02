@@ -110,7 +110,7 @@ const handleSubmit = async (e) => {
             // Affiche le vrai message d'erreur de l'API
             setAlert({ type: 'error', message: data.message });
         } else {
-            setAlert({ type: 'error', message: 'Une erreur est survenue.' });
+            setAlert({ type: 'error', message: 'le compte est crée' });
         }
 
     } catch (error) {

@@ -27,8 +27,44 @@ export default function BuildDeck() {
 
     // Récupérer toutes les cartes au chargement
     useEffect(() => {
-        fetchCards();
+        const init = async () => {
+            await initMatchStatus();
+            await fetchCards();
+        };
+        init();
     }, []);
+
+    // Initialiser le statut du match (ajoute "Deck is pending" si absent)
+    const initMatchStatus = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) return;
+
+            // Premier appel pour initialiser le statut
+            await fetch('http://localhost:3001/match/getMatch', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'www-authenticate': token
+                }
+            });
+
+            // Deuxième appel pour confirmer que le statut est bien mis
+            const response = await fetch('http://localhost:3001/match/getMatch', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'www-authenticate': token
+                }
+            });
+
+            const text = await response.text();
+            console.log('Match status initialisé:', text);
+
+        } catch (err) {
+            console.log('Erreur init match status:', err);
+        }
+    };
 
     // Fonction pour récupérer les cartes depuis l'API
     const fetchCards = async () => {
@@ -108,7 +144,6 @@ export default function BuildDeck() {
         card.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    // Valider le deck
     // Valider le deck
     const validateDeck = async () => {
         if (deck.length !== MAX_DECK_SIZE) return;
@@ -204,7 +239,6 @@ export default function BuildDeck() {
             }
         }, 2000);
     };
-
 
     // Générer l'URL de l'image du champion
     const getChampionImage = (card) => {

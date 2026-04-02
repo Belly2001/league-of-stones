@@ -13,6 +13,9 @@ import styles from '../styles/Matchmaking.module.css';
 export default function ParticiperPage() {
     const router = useRouter();
 
+    // Protection de route
+    const [isAuthorized, setIsAuthorized] = useState(false);
+
     // State : l'utilisateur a rejoint ou pas ?
     const [hasJoined, setHasJoined] = useState(false);
 
@@ -26,9 +29,19 @@ export default function ParticiperPage() {
     const [isLoadingList, setIsLoadingList] = useState(false);
     const [listError, setListError] = useState('');
 
+    // Vérifier si l'utilisateur est connecté
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            router.push('/connexion');
+        } else {
+            setIsAuthorized(true);
+        }
+    }, [router]);
+
     // Vérifier périodiquement si un match a été créé
     useEffect(() => {
-        if (!hasJoined) return;
+        if (!hasJoined || !isAuthorized) return;
 
         const checkMatch = async () => {
             try {
@@ -71,10 +84,9 @@ export default function ParticiperPage() {
         // Vérifier toutes les 3 secondes
         const interval = setInterval(checkMatch, 3000);
 
-        // Nettoyer l'intervalle quand le composant se démonte
         return () => clearInterval(interval);
 
-    }, [hasJoined, router]);
+    }, [hasJoined, isAuthorized, router]);
 
     // Fonction pour rejoindre le matchmaking
     const handleJoin = async () => {
@@ -141,7 +153,6 @@ export default function ParticiperPage() {
         try {
             const token = localStorage.getItem('token');
 
-            // Récupérer les participants
             const response = await fetch('http://localhost:3001/matchmaking/getAll', {
                 method: 'GET',
                 headers: {
@@ -199,6 +210,11 @@ export default function ParticiperPage() {
             setIsLoadingList(false);
         }
     };
+
+    // Afficher rien si pas autorisé
+    if (!isAuthorized) {
+        return null;
+    }
 
     return (
         <div className={styles.container}>

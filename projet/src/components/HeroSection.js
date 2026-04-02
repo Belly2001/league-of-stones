@@ -26,7 +26,7 @@ export default function HeroSection() {
                     Affrontez vos adversaires avec les champions de League of Legends
                     dans des duels de cartes épiques. Construisez votre deck et
                     prouvez votre valeur.
-                    lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur .
+                    lorem ipsum dolor sit , adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur .
                 </p>
 
                 <div className={styles.heroButtons}>

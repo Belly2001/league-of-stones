@@ -1,0 +1,41 @@
+.navBtn {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 28px;
+    background: rgba(10, 10, 26, 0.85);
+    border: 2px solid #E5CC14;
+    border-radius: 4px;
+    color: #E5CC14;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    text-transform: uppercase;
+}
+
+.navBtn:hover {
+    background: rgba(229, 204, 20, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(229, 204, 20, 0.25);
+}
+
+.navBtn svg {
+    font-size: 20px;
+}
+
+@media (max-width: 768px) {
+    .navBtn {
+        bottom: 24px;
+        right: 20px;
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}

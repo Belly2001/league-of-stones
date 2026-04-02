@@ -91,15 +91,6 @@ export default function HowItWorks() {
                     ))}
                 </div>
 
-
-                <p className={styles.bottomText}>
-                    League of Stones est un jeu de cartes stratégique inspiré de Hearthstone 
-                    et League of Legends. Affrontez vos camarades dans des duels épiques, 
-                    construisez le deck parfait et prouvez que vous êtes le meilleur stratège. 
-                    Chaque partie est unique, chaque décision compte. 
-                    Êtes-vous prêt à entrer dans l'arène ?
-                </p>
-
             </div>
 
         </section>

@@ -24,9 +24,10 @@ export default function HeroSection() {
 
                 <p className={styles.heroDescription}>
                     Affrontez vos adversaires avec les champions de League of Legends
-                    dans des duels de cartes épiques. Construisez votre deck et
-                    prouvez votre valeur.
-                    lorem ipsum dolor sit , adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur .
+                    dans des duels de cartes de notre application. Construisez votre deck et
+                    prouvez à votre adversaire votre puissance. <br />
+                    Sélectionnez vos 20 champions, affrontez vos adversaires en temps réel <br />  
+                    Pour en savoir plus sur l'application, l'historique et son inspiration , cliquez ici bas!             
                 </p>
 
                 <div className={styles.heroButtons}>

@@ -1,93 +1,141 @@
-# League-Of-Stones
+# League of Stones
 
+Jeu de cartes multijoueur en ligne inspiré de Hearthstone et League of Legends.
 
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://mi-git.univ-tlse2.fr/enack-philippe.ndabigeze/league-of-stones.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://mi-git.univ-tlse2.fr/enack-philippe.ndabigeze/league-of-stones/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white)
+![Express](https://img.shields.io/badge/Express-000000?style=flat&logo=express&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat&logo=mongodb&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
 
 ## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+Application web de jeu de cartes où deux joueurs s'affrontent en temps réel. Chaque joueur construit un deck de 20 cartes représentant des champions de League of Legends, puis combat en tour par tour jusqu'à réduire les points de vie adverses à zéro.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+## Fonctionnalités
+
+- **Authentification** : Inscription et connexion sécurisées avec JWT
+- **Matchmaking** : Création de partie, envoi de demandes, acceptation de défis
+- **Construction de deck** : Sélection de 20 cartes parmi les champions disponibles
+- **Combat tour par tour** :
+  - Pioche automatique à chaque tour
+  - Pose de cartes sur le plateau (max 5)
+  - Attaques entre cartes ou directement sur l'adversaire
+  - Gestion des points de vie (150 PV initiaux)
+
+## Stack technique
+
+### Frontend
+- **Next.js** (Pages Router)
+- **React** (useState, useEffect)
+- **CSS Modules**
+
+### Backend
+- **Node.js** / **Express**
+- **MongoDB** (conteneurisé avec Docker)
+- **JWT** pour l'authentification
 
 ## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+### Prérequis
+- Node.js (v16+)
+- Docker Desktop
+- MongoDB Compass (optionnel)
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+### 1. Cloner le projet
+```bash
+git clone https://github.com/votre-username/league-of-stones.git
+cd league-of-stones
+```
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+### 2. Lancer la base de données
+```bash
+cd Backend/League-Of-Stones
+docker-compose up -d
+```
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+### 3. Lancer le backend
+```bash
+cd Backend/League-Of-Stones
+npm install
+npm start
+```
+Le serveur démarre sur `http://localhost:3001`
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+### 4. Lancer le frontend
+```bash
+cd projet
+npm install
+npm run dev
+```
+L'application est accessible sur `http://localhost:3000`
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+## Structure du projet
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+```
+LEAGUE-OF-STONES/
+├── Backend/League-Of-Stones/
+│   ├── app.js
+│   ├── modules/
+│   │   ├── matchmaking.js
+│   │   └── match.js
+│   └── docker-compose.yml
+│
+└── projet/
+    └── src/
+        ├── components/
+        │   ├── NavBar.js
+        │   ├── Inscription.js
+        │   ├── Connexion.js
+        │   ├── BuildDeck.js
+        │   ├── Participer.js
+        │   ├── Demande.js
+        │   └── Match.js
+        ├── pages/
+        └── styles/
+```
 
-## License
-For open source projects, say how it is licensed.
+## API Endpoints
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+| Méthode | Endpoint | Description |
+|---------|----------|-------------|
+| PUT | `/user` | Créer un compte |
+| POST | `/login` | Se connecter |
+| POST | `/logout` | Se déconnecter |
+| GET | `/cards` | Liste des champions |
+| GET | `/matchmaking/participate` | Créer une partie |
+| GET | `/matchmaking/getAll` | Liste des parties |
+| GET | `/matchmaking/request?matchmakingId=xxx` | Demander à rejoindre |
+| GET | `/matchmaking/acceptRequest?matchmakingId=xxx` | Accepter une demande |
+| GET | `/match/getMatch` | État du match |
+| GET | `/match/initDeck?deck=[...]` | Soumettre son deck |
+| GET | `/match/pickCard` | Piocher une carte |
+| GET | `/match/playCard?card=KEY` | Poser une carte |
+| GET | `/match/attack?card=KEY&ennemyCard=KEY` | Attaquer une carte |
+| GET | `/match/attackPlayer?card=KEY` | Attaquer le joueur |
+| GET | `/match/endTurn` | Terminer son tour |
+
+## Règles du jeu
+
+| Règle | Valeur |
+|-------|--------|
+| Points de vie initiaux | 150 |
+| Cartes en main au départ | 4 |
+| Taille max du plateau | 5 |
+| Taille du deck | 20 cartes |
+| Pioche par tour | 1 carte |
+
+### Combat
+- **ATK > DEF adverse** : La carte adverse est détruite, dégâts infligés au joueur
+- **ATK < DEF adverse** : Votre carte est détruite
+- **ATK = DEF** : Les deux cartes sont détruites
+- **Attaque directe** : Possible uniquement si le plateau adverse est vide
+
+## Auteur
+
+Projet universitaire — Licence 3 MIASHS, Université Toulouse Jean Jaurès
+
+## Licence
+
+Ce projet est à usage éducatif.
